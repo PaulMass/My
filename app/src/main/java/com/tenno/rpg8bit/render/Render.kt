@@ -14,26 +14,26 @@ class Render(val game: Game) {
     private data class Pal(val chao: Int, val chaoVar: Int, val parede: Int, val topo: Int, val det: Int)
 
     private val paletas = mapOf(
-        Paleta.GRINEER to Pal(0xFF3E3A33, 0xFF33302B, 0xFF5C5348, 0xFF7A6E60, 0xFFB08D57),
-        Paleta.CORPUS to Pal(0xFFC9D2DE, 0xFFB7C2D2, 0xFFE8EDF4, 0xFFFFFFFF, 0xFF2196F3),
-        Paleta.INFESTADO to Pal(0xFF5C2E3C, 0xFF4E2633, 0xFF7A3B4C, 0xFF96505F, 0xFFB0677A),
-        Paleta.OROKIN to Pal(0xFFDCD2BC, 0xFFCFC4AC, 0xFFF2EAD8, 0xFFFFFFFF, 0xFFD4AF37)
+        Paleta.GRINEER to Pal(0xFF3E3A33.toInt(), 0xFF33302B.toInt(), 0xFF5C5348.toInt(), 0xFF7A6E60.toInt(), 0xFFB08D57.toInt()),
+        Paleta.CORPUS to Pal(0xFFC9D2DE.toInt(), 0xFFB7C2D2.toInt(), 0xFFE8EDF4.toInt(), 0xFFFFFFFF.toInt(), 0xFF2196F3.toInt()),
+        Paleta.INFESTADO to Pal(0xFF5C2E3C.toInt(), 0xFF4E2633.toInt(), 0xFF7A3B4C.toInt(), 0xFF96505F.toInt(), 0xFFB0677A.toInt()),
+        Paleta.OROKIN to Pal(0xFFDCD2BC.toInt(), 0xFFCFC4AC.toInt(), 0xFFF2EAD8.toInt(), 0xFFFFFFFF.toInt(), 0xFFD4AF37.toInt())
     )
 
     private val paint = Paint()
 
-    private val BG = 0xFF0D1422
-    private val PANEL = 0xFF14141F
-    private val PANEL2 = 0xFF1E1E2E
-    private val GOLD = 0xFFD4AF37
-    private val WHITE = 0xFFFFFFFF
-    private val GRAY = 0xFF90A4AE
-    private val RED = 0xFFE53935
-    private val BLUE = 0xFF42A5F5
-    private val YELLOW = 0xFFFFEB3B
-    private val GREEN = 0xFF66BB6A
-    private val LIGHTRED = 0xFFFFCDD2
-    private val LIGHTBLUE = 0xFFBBDEFB
+    private val BG = 0xFF0D1422.toInt()
+    private val PANEL = 0xFF14141F.toInt()
+    private val PANEL2 = 0xFF1E1E2E.toInt()
+    private val GOLD = 0xFFD4AF37.toInt()
+    private val WHITE = 0xFFFFFFFF.toInt()
+    private val GRAY = 0xFF90A4AE.toInt()
+    private val RED = 0xFFE53935.toInt()
+    private val BLUE = 0xFF42A5F5.toInt()
+    private val YELLOW = 0xFFFFEB3B.toInt()
+    private val GREEN = 0xFF66BB6A.toInt()
+    private val LIGHTRED = 0xFFFFCDD2.toInt()
+    private val LIGHTBLUE = 0xFFBBDEFB.toInt()
 
     fun render(c: Canvas) {
         when (game.state) {
@@ -62,22 +62,22 @@ class Render(val game: Game) {
     }
 
     private fun bar(c: Canvas, x: Int, y: Int, w: Int, h: Int, frac: Float, color: Int) {
-        paint.color = 0xFF000000
+        paint.color = 0xFF000000.toInt()
         rect(c, x, y, w, h)
         paint.color = color
         val fw = (w * frac.coerceIn(0f, 1f)).toInt()
         if (fw > 0) rect(c, x, y, fw, h)
-        paint.color = 0xFF424242
+        paint.color = 0xFF424242.toInt()
         border(c, x, y, w, h)
     }
 
     private fun darken(color: Int): Int =
-        0xFF000000.toInt() or ((color and 0x00FEFEFE) shr 1)
+        0xFF000000.toInt() or ((color and 0x00FEFEFE.toInt()) shr 1)
 
     private fun playerPal(): Map<Char, Int> {
         val cls = game.player.classRef
         return if (cls != null) Sprites.classPalette(cls.corPrim, cls.corSec, cls.corAcento)
-        else Sprites.classPalette(0xFFFFFFFF, 0xFF888888, 0xFFD4AF37)
+        else Sprites.classPalette(0xFFFFFFFF.toInt(), 0xFF888888.toInt(), 0xFFD4AF37.toInt())
     }
 
     private fun title(c: Canvas) {
@@ -88,12 +88,12 @@ class Render(val game: Game) {
             val y = (i * 57 + 7) % Game.H
             if (i % 3 == 0) rect(c, x, y, 1, 1)
         }
-        Sprites.lotus(c, 146, 14, 2, GOLD, 0xFF8A6D1F)
+        Sprites.lotus(c, 146, 14, 2, GOLD, 0xFF8A6D1F.toInt())
         Font.drawCentered(c, "WARFRAME", 160, 80, 3, GOLD)
         Font.drawCentered(c, "8-BIT RPG", 160, 110, 2, WHITE)
         Font.drawCentered(c, "RPG DE D20 NO SISTEMA DE ORIGEM", 160, 130, 1, GRAY)
         if (game.frame / 25 % 2 == 0) Font.drawCentered(c, "PRESSIONE A", 160, 148, 1, YELLOW)
-        Font.drawCentered(c, "DPAD/SETAS MOVER - A CONFIRMA - B VOLTA", 160, 168, 1, 0xFF607D8B)
+        Font.drawCentered(c, "DPAD/SETAS MOVER - A CONFIRMA - B VOLTA", 160, 168, 1, 0xFF607D8B.toInt())
     }
 
     private fun rolls(c: Canvas) {
@@ -123,7 +123,7 @@ class Render(val game: Game) {
         for (i in 0 until 8) {
             val x = 88 + i * 18
             val y = 70
-            paint.color = if (i == game.nameCursor && game.frame / 20 % 2 == 0) GOLD else 0xFF424242
+            paint.color = if (i == game.nameCursor && game.frame / 20 % 2 == 0) GOLD else 0xFF424242.toInt()
             border(c, x, y, 16, 16)
             paint.color = PANEL2
             rect(c, x + 1, y + 1, 14, 14)
@@ -168,7 +168,7 @@ class Render(val game: Game) {
     }
 
     private fun explore(c: Canvas) {
-        c.drawColor(0xFF000000)
+        c.drawColor(0xFF000000.toInt())
         hud(c)
         val pal = paletas[game.map.paleta]!!
         for (ty in game.camY until minOf(game.camY + Game.VIEW_H, game.map.altura)) {
@@ -182,11 +182,11 @@ class Render(val game: Game) {
             (game.player.x - game.camX) * 16,
             Game.HUD_H + (game.player.y - game.camY) * 16 + bob
         )
-        Font.draw(c, game.map.nome, 210, 171, 1, 0xFF607D8B)
+        Font.draw(c, game.map.nome, 210, 171, 1, 0xFF607D8B.toInt())
     }
 
     private fun hud(c: Canvas) {
-        paint.color = 0xFF101018
+        paint.color = 0xFF101018.toInt()
         rect(c, 0, 0, Game.W, Game.HUD_H)
         paint.color = GOLD
         rect(c, 0, Game.HUD_H - 1, Game.W, 1)
@@ -222,9 +222,9 @@ class Render(val game: Game) {
         rect(c, px, py, 1, 16)
         when (ch) {
             'C' -> {
-                paint.color = 0xFF6D4420
+                paint.color = 0xFF6D4420.toInt()
                 rect(c, px + 2, py + 5, 12, 4)
-                paint.color = 0xFF8D5A2B
+                paint.color = 0xFF8D5A2B.toInt()
                 rect(c, px + 2, py + 9, 12, 6)
                 paint.color = GOLD
                 rect(c, px + 7, py + 8, 2, 4)
@@ -236,26 +236,26 @@ class Render(val game: Game) {
                 rect(c, px + 5, py + 5, 6, 2)
             }
             'F' -> {
-                paint.color = 0xFF424242
+                paint.color = 0xFF424242.toInt()
                 rect(c, px + 3, py + 11, 10, 3)
                 val f = game.frame / 8 % 3
-                paint.color = 0xFFE65100
+                paint.color = 0xFFE65100.toInt()
                 rect(c, px + 5, py + 7, 6, 6)
-                paint.color = 0xFFFF9800
+                paint.color = 0xFFFF9800.toInt()
                 rect(c, px + 6, py + 6 - f, 4, 7)
-                paint.color = 0xFFFFEB3B
+                paint.color = 0xFFFFEB3B.toInt()
                 rect(c, px + 7, py + 9, 2, 3)
             }
             'D' -> {
                 paint.color = pal.det
                 rect(c, px + 2, py + 1, 12, 15)
-                paint.color = 0xFF1A1A22
+                paint.color = 0xFF1A1A22.toInt()
                 rect(c, px + 4, py + 3, 8, 13)
             }
             'X' -> {
-                paint.color = 0xFF263238
+                paint.color = 0xFF263238.toInt()
                 rect(c, px + 2, py + 4, 12, 10)
-                paint.color = if (game.frame / 30 % 2 == 0) pal.det else 0xFF102027
+                paint.color = if (game.frame / 30 % 2 == 0) pal.det else 0xFF102027.toInt()
                 rect(c, px + 4, py + 6, 8, 4)
             }
         }
@@ -264,7 +264,7 @@ class Render(val game: Game) {
     private fun combat(c: Canvas) {
         val cb = game.combat ?: return
         val p = game.player
-        c.drawColor(0xFF0A0A12)
+        c.drawColor(0xFF0A0A12.toInt())
         paint.color = PANEL
         rect(c, 0, 0, Game.W, 92)
         paint.color = GOLD
@@ -273,11 +273,11 @@ class Render(val game: Game) {
         val sc = if (cb.def.tamanho >= 24) 2 else 3
         val es = cb.def.tamanho * sc
         Sprites.draw(c, pair.first, pair.second, Game.W - es - 10, (92 - es) / 2 + 4, sc)
-        Font.draw(c, cb.def.nome + if (cb.boss) " (CHEFE)" else "", 8, 6, 1, 0xFFFFD54F)
+        Font.draw(c, cb.def.nome + if (cb.boss) " (CHEFE)" else "", 8, 6, 1, 0xFFFFD54F.toInt())
         bar(c, 8, 20, 130, 7, cb.enemy.pv.toFloat() / cb.def.pv, RED)
         Font.draw(c, "${cb.enemy.pv}/${cb.def.pv}", 144, 20, 1, WHITE)
         if (cb.enemy.atordoado > 0) Font.draw(c, "ATORDOADO!", 8, 32, 1, YELLOW)
-        if (cb.boss && cb.def.rajadaTurnos > 0) Font.draw(c, "RAJADA A CADA ${cb.def.rajadaTurnos} TURNOS", 8, 44, 1, 0xFFFF8A80)
+        if (cb.boss && cb.def.rajadaTurnos > 0) Font.draw(c, "RAJADA A CADA ${cb.def.rajadaTurnos} TURNOS", 8, 44, 1, 0xFFFF8A80.toInt())
 
         paint.color = PANEL
         rect(c, 0, 92, 132, 88)
@@ -292,13 +292,13 @@ class Render(val game: Game) {
         Font.draw(c, "EN ${p.en}/${p.enMax}", 42, 146, 1, LIGHTBLUE)
         Font.draw(c, "CA ${p.ca}  ${p.armaNome}", 6, 168, 1, GRAY)
 
-        paint.color = 0xFF0D0D16
+        paint.color = 0xFF0D0D16.toInt()
         rect(c, 136, 92, 184, 48)
-        paint.color = 0xFF2A2A3A
+        paint.color = 0xFF2A2A3A.toInt()
         rect(c, 136, 92, 184, 1)
         rect(c, 136, 139, 184, 1)
         cb.log.forEachIndexed { i, line ->
-            val col = if (i == cb.log.size - 1) WHITE else 0xFF9E9E9E
+            val col = if (i == cb.log.size - 1) WHITE else 0xFF9E9E9E.toInt()
             Font.draw(c, line, 140, 96 + i * 11, 1, col)
         }
 
@@ -311,7 +311,7 @@ class Render(val game: Game) {
                     if (i == cb.sel) {
                         paint.color = GOLD
                         rect(c, x, y, 88, 16)
-                        Font.draw(c, opts[i], x + 10, y + 4, 1, 0xFF0A0A12)
+                        Font.draw(c, opts[i], x + 10, y + 4, 1, 0xFF0A0A12.toInt())
                     } else {
                         paint.color = PANEL2
                         rect(c, x, y, 88, 16)
@@ -324,7 +324,7 @@ class Render(val game: Game) {
                 rect(c, 136, 144, 184, 34)
                 Font.draw(c, "PODERES (EN ${p.en}):", 140, 147, 1, GOLD)
                 p.skills.forEachIndexed { i, s ->
-                    val col = if (i == cb.subSel) YELLOW else 0xFF9E9E9E
+                    val col = if (i == cb.subSel) YELLOW else 0xFF9E9E9E.toInt()
                     Font.draw(c, "> ${s.nome} -${s.custo}EN", 140, 157 + i * 9, 1, col)
                 }
             }
@@ -337,7 +337,7 @@ class Render(val game: Game) {
                 for (k in 0 until minOf(3, grupos.size - start)) {
                     val g = grupos[start + k]
                     val i = start + k
-                    val col = if (i == cb.subSel) YELLOW else 0xFF9E9E9E
+                    val col = if (i == cb.subSel) YELLOW else 0xFF9E9E9E.toInt()
                     Font.draw(c, "> ${g.first().nome} x${g.size}", 140, 157 + k * 9, 1, col)
                 }
             }
@@ -352,7 +352,7 @@ class Render(val game: Game) {
         val x = 50
         val y = 112
         val w = 210
-        paint.color = 0xFF000000
+        paint.color = 0xFF000000.toInt()
         paint.alpha = 225
         rect(c, x, y, w, h)
         paint.alpha = 255
@@ -363,7 +363,7 @@ class Render(val game: Game) {
     }
 
     private fun over(c: Canvas) {
-        c.drawColor(0xFF1A0508)
+        c.drawColor(0xFF1A0508.toInt())
         Font.drawCentered(c, "VOCE CAIU EM COMBATE...", 160, 50, 2, RED)
         val p = game.player
         Font.drawCentered(c, "${p.nome} - NIVEL ${p.nivel}", 160, 90, 1, WHITE)
@@ -379,7 +379,7 @@ class Render(val game: Game) {
             val y = (i * 47 + 11) % Game.H
             if (i % 2 == 0) rect(c, x, y, 1, 1)
         }
-        Sprites.lotus(c, 148, 16, 2, GOLD, 0xFF8A6D1F)
+        Sprites.lotus(c, 148, 16, 2, GOLD, 0xFF8A6D1F.toInt())
         Font.drawCentered(c, "VITORIA!", 160, 82, 3, GOLD)
         Font.drawCentered(c, "O SISTEMA DE ORIGEM ESTA SEGURO!", 160, 114, 1, WHITE)
         val p = game.player
@@ -395,7 +395,7 @@ class Render(val game: Game) {
         dpadButton(c, 4, 138, Input.Act.LEFT, 2, input.isDown(Input.Act.LEFT))
         dpadButton(c, 28, 138, Input.Act.RIGHT, 3, input.isDown(Input.Act.RIGHT))
         paint.alpha = 170
-        paint.color = 0xFF1A1A2E
+        paint.color = 0xFF1A1A2E.toInt()
         rect(c, 16, 138, 16, 16)
         paint.alpha = 255
         circleButton(c, 302, 156, 12, "A", input.isDown(Input.Act.A))
@@ -404,12 +404,12 @@ class Render(val game: Game) {
 
     private fun dpadButton(c: Canvas, x: Int, y: Int, act: Input.Act, dir: Int, active: Boolean) {
         paint.alpha = 170
-        paint.color = if (active) 0xFF5A4A1F else 0xFF1A1A2E
+        paint.color = if (active) 0xFF5A4A1F.toInt() else 0xFF1A1A2E.toInt()
         rect(c, x, y, 16, 16)
         paint.alpha = 255
-        paint.color = if (active) GOLD else 0xFF37474F
+        paint.color = if (active) GOLD else 0xFF37474F.toInt()
         border(c, x, y, 16, 16)
-        paint.color = if (active) GOLD else 0xFFB0BEC5
+        paint.color = if (active) GOLD else 0xFFB0BEC5.toInt()
         val p = Path()
         when (dir) {
             0 -> { p.moveTo(x + 8f, y + 3f); p.lineTo(x + 3f, y + 10f); p.lineTo(x + 13f, y + 10f) }
@@ -423,11 +423,11 @@ class Render(val game: Game) {
 
     private fun circleButton(c: Canvas, x: Int, y: Int, r: Int, label: String, active: Boolean) {
         paint.alpha = 200
-        paint.color = if (active) 0xFF5A4A1F else 0xFF263238
+        paint.color = if (active) 0xFF5A4A1F.toInt() else 0xFF263238.toInt()
         paint.style = Paint.Style.FILL
         c.drawCircle(x.toFloat(), y.toFloat(), r.toFloat(), paint)
         paint.alpha = 255
-        paint.color = if (active) GOLD else 0xFF546E7A
+        paint.color = if (active) GOLD else 0xFF546E7A.toInt()
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 2f
         c.drawCircle(x.toFloat(), y.toFloat(), r.toFloat(), paint)
