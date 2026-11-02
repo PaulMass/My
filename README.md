@@ -6,6 +6,16 @@ Um RPG de 8 bits para **Android**, estilo **Dungeons & Dragons**, ambientado no 
 
 ## Como compilar e rodar
 
+### Opção A — APK pronto (CI no GitHub)
+
+O repositório tem um workflow (`.github/workflows/build-apk.yml`) que compila o `app-debug.apk` a cada push/PR. Para testar no celular:
+
+1. Vá em **Actions** neste repositório e abra a run mais recente com sucesso.
+2. Baixe o artefato **app-debug-apk** (na aba *Artifacts* da run).
+3. Envie o `app-debug.apk` para o celular (USB, Drive, etc.) e toque nele para instalar — ative "instalar de fontes desconhecidas" se o Android pedir.
+
+### Opção B — compilar localmente no Android Studio
+
 1. Instale o **Android Studio** (versão recente, com JDK 17 integrado).
 2. Abra este diretório como projeto (**File > Open**).
 3. Aguarde o Gradle sincronizar (na primeira vez ele baixa o Android Gradle Plugin e o plugin Kotlin — precisa de internet nessa etapa).
